@@ -25,7 +25,7 @@ questControls MODULE-IDENTITY
 	-- revisions
 	REVISION "202407300000Z"
 	DESCRIPTION
-		"Various Changes"
+		"Added ospreyFMSMIBNotifyAlarmID"
 	REVISION "201701090000Z"
 	DESCRIPTION
 		"Initial Release"
