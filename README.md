@@ -1,2 +1,2 @@
-# docs
+# Public Documents
 Osprey Public Documents
