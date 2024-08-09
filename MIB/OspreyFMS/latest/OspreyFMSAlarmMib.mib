@@ -1,0 +1,323 @@
+QUEST-OspreyFMS-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    OBJECT-TYPE, 
+    NOTIFICATION-TYPE, 
+    MODULE-IDENTITY,
+    enterprises
+        FROM SNMPv2-SMI
+    DisplayString,
+    DateAndTime
+        FROM SNMPv2-TC
+    NOTIFICATION-GROUP, 
+    OBJECT-GROUP
+	FROM SNMPv2-CONF;
+
+questControls MODULE-IDENTITY
+    LAST-UPDATED "202407300000Z"
+    ORGANIZATION "Quest Controls Inc"   
+    CONTACT-INFO
+        "Postal: 208 9th Street Dr. West, Palmetto FL 34221
+         Phone:  (941) 729-4799
+         EMail:  questmail@questcontrols.com"
+    DESCRIPTION
+        "OspreyFMS MIB Module that defines the notifications from the OspreyFMS Software"
+	-- revisions
+	REVISION "202407300000Z"
+	DESCRIPTION
+		"Added ospreyFMSMIBNotifyAlarmID"
+	REVISION "201701090000Z"
+	DESCRIPTION
+		"Initial Release"
+    ::= { enterprises 11476 }
+
+
+ospreyFMSMIB OBJECT IDENTIFIER ::= { questControls 200 }
+
+-- Groups Section ========================================================
+
+ospreyFMSGroupNotifications	NOTIFICATION-GROUP
+	NOTIFICATIONS { ospreyFMSAlarmClear, ospreyFMSAlarm }
+	STATUS	current
+	DESCRIPTION
+		"A collection of notifications"
+	::= { ospreyFMSMIB 2 }
+
+ospreyFMSGroupObjects	OBJECT-GROUP
+	OBJECTS { 
+		ospreyFMSMIBNotifyCriticality,
+		ospreyFMSMIBNotifyTime,
+		ospreyFMSMIBNotifyIP,
+		ospreyFMSMIBNotifySiteName,
+		ospreyFMSMIBNotifySiteCode1,
+		ospreyFMSMIBNotifySiteCode2,
+		ospreyFMSMIBNotifySiteCode3,
+		ospreyFMSMIBNotifyDeviceName,
+		ospreyFMSMIBNotifyPointGroupName,
+		ospreyFMSMIBNotifyPointName,
+		ospreyFMSMIBNotifyPointName2,
+		ospreyFMSMIBNotifyAlarmName,
+		ospreyFMSMIBNotifyAlarmTime,
+		ospreyFMSMIBNotifyAlarmValue,
+		ospreyFMSMIBNotifyAlarmValue2,
+		ospreyFMSMIBNotifyAlarmDescription,
+		ospreyFMSMIBNotifyAlarmNotes,
+		ospreyFMSMIBNotifyAlarmNotifyType,
+		ospreyFMSMIBNotifyPointOID,
+		ospreyFMSMIBNotifyPointOID2,
+		ospreyFMSMIBNotifyPointProtocolInfo,
+		ospreyFMSMIBNotifyAlarmID
+	}
+	STATUS	current
+	DESCRIPTION
+		"A collection of objects"
+	::= { ospreyFMSMIB 3 }
+
+-- Notification Section ==================================================
+
+ospreyFMSMIBVarbinds OBJECT IDENTIFIER ::= { ospreyFMSMIB 1 }
+
+ospreyFMSMIBNotifyCriticality OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Alarm criticality in text i.e. Critical, Major, Minor, Clear, Info" 
+    ::= { ospreyFMSMIBVarbinds 1 }
+
+ospreyFMSMIBNotifyTime OBJECT-TYPE
+    SYNTAX      DateAndTime
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "The time the trap is created and sent" 
+    ::= { ospreyFMSMIBVarbinds 2 }
+
+ospreyFMSMIBNotifyIP OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "IP address of the device that originated the alarm" 
+    ::= { ospreyFMSMIBVarbinds 3 }
+
+ospreyFMSMIBNotifySiteName OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Site name Originating Trap" 
+    ::= { ospreyFMSMIBVarbinds 4 }
+
+ospreyFMSMIBNotifySiteCode1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Site Code 1" 
+    ::= { ospreyFMSMIBVarbinds 5 }
+
+ospreyFMSMIBNotifySiteCode2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Site Code 2" 
+    ::= { ospreyFMSMIBVarbinds 6 }
+
+ospreyFMSMIBNotifySiteCode3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Site Code 3" 
+    ::= { ospreyFMSMIBVarbinds 7 }
+
+ospreyFMSMIBNotifyDeviceName OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Device Name originating trap" 
+    ::= { ospreyFMSMIBVarbinds 8 }
+
+ospreyFMSMIBNotifyPointGroupName OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Point Group Name originating trap" 
+    ::= { ospreyFMSMIBVarbinds 9 }
+
+ospreyFMSMIBNotifyPointName OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Point Name or device name in alarm" 
+    ::= { ospreyFMSMIBVarbinds 10 }
+
+ospreyFMSMIBNotifyPointName2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Point Name or device name (2) in alarm" 
+    ::= { ospreyFMSMIBVarbinds 11 }
+
+ospreyFMSMIBNotifyAlarmName OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Name of the alarm that occurred" 
+    ::= { ospreyFMSMIBVarbinds 12 }
+
+ospreyFMSMIBNotifyAlarmTime OBJECT-TYPE
+    SYNTAX      DateAndTime
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Time the alarm occurred" 
+    ::= { ospreyFMSMIBVarbinds 13 }
+
+ospreyFMSMIBNotifyAlarmValue OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Value at the time the device or point went into alarm i.e. 50.5, On, Alarm, 145.6" 
+    ::= { ospreyFMSMIBVarbinds 14 }
+
+ospreyFMSMIBNotifyAlarmValue2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Value at the time the device or point went into alarm i.e. 50.5, On, Alarm, 145.6" 
+    ::= { ospreyFMSMIBVarbinds 15 }
+
+ospreyFMSMIBNotifyAlarmDescription OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Alarm description i.e. Loss of Communications" 
+    ::= { ospreyFMSMIBVarbinds 16 }
+
+ospreyFMSMIBNotifyAlarmNotes OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Alarm notes (field that is editable in advanced alarming)" 
+    ::= { ospreyFMSMIBVarbinds 17 }
+
+ospreyFMSMIBNotifyAlarmNotifyType OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "Alarm notify type (field that is editable in advanced alarming)" 
+    ::= { ospreyFMSMIBVarbinds 18 }
+
+ospreyFMSMIBNotifyPointOID OBJECT-TYPE
+    SYNTAX      OBJECT IDENTIFIER
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "OID of the point in alarm if it exists as an OID" 
+    ::= { ospreyFMSMIBVarbinds 19 }
+
+ospreyFMSMIBNotifyPointOID2 OBJECT-TYPE
+    SYNTAX      OBJECT IDENTIFIER
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "OID of the point in alarm if it exists as an OID" 
+    ::= { ospreyFMSMIBVarbinds 20 }
+
+ospreyFMSMIBNotifyPointProtocolInfo OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "When the point is not SNMP, this will include point information specific to a protocol.   AnalogValue 3 for example for a BACnet point." 
+    ::= { ospreyFMSMIBVarbinds 21 }
+
+ospreyFMSMIBNotifyAlarmID OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION
+        "OspreyFMS Unique Alarm ID" 
+    ::= { ospreyFMSMIBVarbinds 22 }
+	
+-- General Notifications =================================================
+
+ospreyFMSNotifications OBJECT IDENTIFIER ::= { ospreyFMSMIB 0 }
+
+ospreyFMSAlarmClear NOTIFICATION-TYPE
+    OBJECTS { 
+        ospreyFMSMIBNotifyCriticality,
+		ospreyFMSMIBNotifyTime,
+		ospreyFMSMIBNotifyIP,
+		ospreyFMSMIBNotifySiteName,
+		ospreyFMSMIBNotifySiteCode1,
+		ospreyFMSMIBNotifySiteCode2,
+		ospreyFMSMIBNotifySiteCode3,
+		ospreyFMSMIBNotifyDeviceName,
+		ospreyFMSMIBNotifyPointGroupName,
+		ospreyFMSMIBNotifyPointName,
+		ospreyFMSMIBNotifyPointName2,
+		ospreyFMSMIBNotifyAlarmName,
+		ospreyFMSMIBNotifyAlarmTime,
+		ospreyFMSMIBNotifyAlarmValue,
+		ospreyFMSMIBNotifyAlarmValue2,
+		ospreyFMSMIBNotifyAlarmDescription,
+		ospreyFMSMIBNotifyAlarmNotes,
+		ospreyFMSMIBNotifyAlarmNotifyType,
+		ospreyFMSMIBNotifyPointOID,
+		ospreyFMSMIBNotifyPointOID2,
+		ospreyFMSMIBNotifyPointProtocolInfo,
+		ospreyFMSMIBNotifyAlarmID
+    }
+    STATUS  current
+    DESCRIPTION
+        "A Clear event has occurred.  The information for the event is included in the varbinds."
+    ::= { ospreyFMSNotifications 1 }
+
+ospreyFMSAlarm NOTIFICATION-TYPE
+    OBJECTS { 
+        ospreyFMSMIBNotifyCriticality,
+		ospreyFMSMIBNotifyTime,
+		ospreyFMSMIBNotifyIP,
+		ospreyFMSMIBNotifySiteName,
+		ospreyFMSMIBNotifySiteCode1,
+		ospreyFMSMIBNotifySiteCode2,
+		ospreyFMSMIBNotifySiteCode3,
+		ospreyFMSMIBNotifyDeviceName,
+		ospreyFMSMIBNotifyPointGroupName,
+		ospreyFMSMIBNotifyPointName,
+		ospreyFMSMIBNotifyPointName2,
+		ospreyFMSMIBNotifyAlarmName,
+		ospreyFMSMIBNotifyAlarmTime,
+		ospreyFMSMIBNotifyAlarmValue,
+		ospreyFMSMIBNotifyAlarmValue2,
+		ospreyFMSMIBNotifyAlarmDescription,
+		ospreyFMSMIBNotifyAlarmNotes,
+		ospreyFMSMIBNotifyAlarmNotifyType,
+		ospreyFMSMIBNotifyPointOID,
+		ospreyFMSMIBNotifyPointOID2,
+		ospreyFMSMIBNotifyPointProtocolInfo,
+		ospreyFMSMIBNotifyAlarmID
+    }
+    STATUS  current
+    DESCRIPTION
+        "An alarm, described by the varbind, has been raised 
+        (set) or an existing alarm has been resignalled with a new 
+        severity or other new information. The Alarm's severity is 
+        located within the varbinds." 
+    ::= { ospreyFMSNotifications 2 }
+
+END
